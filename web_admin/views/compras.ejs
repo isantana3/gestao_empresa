@@ -1,1 +1,43 @@
 <%- include("head.ejs"); %>
+<body>
+    <div class="table-responsive-sm">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Fornecedor</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th class="d-print-none">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (const item of dados) { %>
+                    <tr>
+                        <td>
+                            <%= item.cod_entrada %>
+                        </td>
+                        <td>
+                            <%= item.fornecedor %>
+                        </td>
+                        <td>
+                            <%= item.quant_compras %>
+                        </td>
+                        <td>
+                            <%= item.valor_compras %>
+                        </td>
+                        <td>
+                            <%= item.data_compra %>
+                        </td>
+                        <td class="d-print-none">
+                        </td>
+                    </tr>
+                    <%} %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
