@@ -8,9 +8,7 @@ const controle = require('./controller/controle.js'); //declara (Controll)
 
 // GET GERAL
 app.get('/', async function (req, res) {
-    let colecao = new Array();
-    colecao = await controle.comercialData();
-    res.render('index.ejs', { dados: colecao }); 
+    res.render('index.ejs'); 
 });
 
 // GET vendas
