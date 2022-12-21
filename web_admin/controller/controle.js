@@ -222,7 +222,6 @@ async function vendasData() {
 
 
 module.exports = {
-    comercialData: comercialData,
     comprasData: comprasData,
     contratoData: contratoData,
     estoqueData: estoqueData,
