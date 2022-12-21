@@ -1,6 +1,6 @@
 drop database if exists DM_financas;
 create database DM_financas;
-use DM_financas;
+use DM_financas
 
 select * from db_compras_vendas.saida;
 

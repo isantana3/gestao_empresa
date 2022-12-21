@@ -1,4 +1,4 @@
-use dw_comercial;
+use dw_comercial
 
 SELECT Num_venda, Quant_Vendas, SetorVendas, CodigoProduto, Produto, NumContrato,
 venda_ano, venda_trimestre, venda_mes, venda_dia_mes, ValorVendas

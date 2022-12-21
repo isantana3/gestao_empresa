@@ -1,5 +1,5 @@
 create database db_compras_vendas;
-use db_compras_vendas;
+use db_compras_vendas
 
 --
 -- Estrutura da tabela `fornecedor`

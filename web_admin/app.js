@@ -14,7 +14,9 @@ app.get('/', async function (req, res) {
 // GET vendas
 app.get('/vendas/', async function (req, res) {
     let colecao = new Array();
+    console.log('getting data...')
     colecao = await controle.vendasData();
+    console.log('rendering data...')
     res.render('vendas.ejs', { dados: colecao }); 
 });
 

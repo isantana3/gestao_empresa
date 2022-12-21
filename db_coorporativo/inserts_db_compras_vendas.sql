@@ -1,4 +1,4 @@
-use db_compras_vendas;
+use db_compras_vendas
 
 INSERT INTO `fornecedor` (`IdFornecedor`, `CodFornecedor`, `RazaoSocial`, `Endereco`, `Cidade`, `Cnpj`, `Inscricao`, `Contato`, `Grupo`, `Fone`, `Bairro`, `CEP`, `NomeBanco`, `Agencia`, `NumConta`) VALUES
 (1, '1784', 'j do nascimento borges materiais de construção', 'rua c n. 42', 'curitiba', '08-366996/0001-65', 'Isento', 'vendedor', '01-01', '021-223-4545', 'centro', '45601485', 'b. brasil', '1230', '585-1'),

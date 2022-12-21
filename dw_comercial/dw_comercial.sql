@@ -1,6 +1,6 @@
 drop database if exists dw_comercial;
 create database dw_comercial;
-use dw_comercial;
+use dw_comercial
 
 --
 -- Estrutura da tabela `dim_dw_data`

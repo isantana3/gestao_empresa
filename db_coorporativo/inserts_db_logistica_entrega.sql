@@ -1,4 +1,4 @@
-use db_logistica_entrega;
+use db_logistica_entrega
 
 INSERT INTO `motorista` (`IdMotorista`, `Nom_Moto`, `Endere`, `Bairro`, `Cidade`) VALUES
 (1, 'pedro calixto araujo da silva', 'av. ferroviaria,10 ,iguape - ios', 'iguape', 'Curitiba'),

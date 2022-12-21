@@ -1,6 +1,6 @@
 drop database if exists DM_logistica;
 create database DM_logistica;
-use DM_logistica;
+use DM_logistica
 
 
 --

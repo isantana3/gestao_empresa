@@ -1,4 +1,4 @@
-use db_gestao_contrato;
+use db_gestao_contrato
 
 INSERT INTO `supervisor` (`IdSetor`, `nomesetor`) VALUES
 (1, 'Loja da Fábrica'),

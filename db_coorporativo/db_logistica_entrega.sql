@@ -1,5 +1,5 @@
 create database db_logistica_entrega;
-use db_logistica_entrega;
+use db_logistica_entrega
 
 --
 -- Estrutura da tabela `motorista`

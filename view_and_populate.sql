@@ -1,14 +1,14 @@
-use dw_comercial;
-DROP TABLE IF EXISTS `view_dw_vendas`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` 
-SQL SECURITY DEFINER VIEW view_dw_vendas  AS 
+use dw_comercial
+DROP TABLE IF EXISTS `view_dw_empresa`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`127.0.0.1` 
+SQL SECURITY DEFINER VIEW view_dw_empresa  AS 
 SELECT 
 db_compras_vendas.saida.CodigoSaida AS CodigoSaida, db_compras_vendas.estoque.CodigoEstoque AS CodigoEstoque, 
-db_compras_vendas.entrada.CodigoEntrada AS Num_entrada, db_compras_vendas.Fornecedor.IdFornecedor AS IdFornecedor,
-db_compras_vendas.Fornecedor.RazaoSocial AS Nomefornecedor, db_compras_vendas.Fornecedor.Grupo AS fornecedor_grupo,
-db_compras_vendas.Fornecedor.CodFornecedor AS ClasseABC, db_compras_vendas.Fornecedor.Cidade AS fornecedorCidade,
-db_compras_vendas.Fornecedor.Endereco AS fornecedorEndereco, db_compras_vendas.Fornecedor.NomeBanco AS fornecedorBanco,
-db_compras_vendas.Fornecedor.Bairro AS fornecedorBairro,
+db_compras_vendas.entrada.CodigoEntrada AS Num_entrada, db_compras_vendas.fornecedor.IdFornecedor AS IdFornecedor,
+db_compras_vendas.fornecedor.RazaoSocial AS Nomefornecedor, db_compras_vendas.fornecedor.Grupo AS fornecedor_grupo,
+db_compras_vendas.fornecedor.CodFornecedor AS ClasseABC, db_compras_vendas.fornecedor.Cidade AS fornecedorCidade,
+db_compras_vendas.fornecedor.Endereco AS fornecedorEndereco, db_compras_vendas.fornecedor.NomeBanco AS fornecedorBanco,
+db_compras_vendas.fornecedor.Bairro AS fornecedorBairro,
 db_compras_vendas.entrada.Grupo AS entrada_grupo, db_gestao_contrato.financeiro.NotaFiscalFin AS NotaFiscal,
 db_compras_vendas.saida.Id_cliente AS Idcliente, db_compras_vendas.saida.NumSaida AS NumSaida, 
 db_compras_vendas.setorvendas.IdSetor AS IdSetor, db_compras_vendas.saida.Requisitante AS Requisitante,
@@ -46,21 +46,23 @@ FROM
             (
               (
                 (
-                  db_compras_vendas.saida 
-                  join db_compras_vendas.estoque on(db_compras_vendas.saida.CodigoSaida = db_compras_vendas.estoque.CodigoEstoque)
-                )join db_gestao_contrato.financeiro on(db_gestao_contrato.financeiro.NotaFiscalFin = db_compras_vendas.saida.NotaFiscal)
-              )join db_gestao_contrato.contrato on(db_gestao_contrato.contrato.NFiscal = db_gestao_contrato.financeiro.NotaFiscalFin)
-            ) join db_gestao_contrato.aditivo on(db_gestao_contrato.aditivo.N_contrato = db_gestao_contrato.contrato.Numero)
-          ) join db_compras_vendas.cliente on(db_compras_vendas.saida.Id_cliente = db_compras_vendas.cliente.Cod_cliente)
-        ) join db_compras_vendas.setorvendas on(db_compras_vendas.saida.Requisitante = db_compras_vendas.setorvendas.IdSetor)
-      ) join db_logistica_entrega.movimentacao on(db_logistica_entrega.movimentacao.Num_Saida = db_compras_vendas.saida.NumSaida)
-    ) join db_logistica_entrega.veiculo on(db_logistica_entrega.veiculo.Placa = db_logistica_entrega.movimentacao.IdPlaca)
-  ) join db_logistica_entrega.abastecimento on(db_logistica_entrega.abastecimento.Placa_Co = db_logistica_entrega.veiculo.Placa)
-) join db_logistica_entrega.motorista on(db_logistica_entrega.abastecimento.Id_Motorista = db_logistica_entrega.motorista.IdMotorista);
-
-
+                  (
+                    (
+                      db_compras_vendas.saida 
+                      join db_compras_vendas.estoque on(db_compras_vendas.saida.CodigoSaida = db_compras_vendas.estoque.CodigoEstoque)
+                    )join db_gestao_contrato.financeiro on(db_gestao_contrato.financeiro.NotaFiscalFin = db_compras_vendas.saida.NotaFiscal)
+                  )join db_gestao_contrato.contrato on(db_gestao_contrato.contrato.NFiscal = db_gestao_contrato.financeiro.NotaFiscalFin)
+                ) join db_gestao_contrato.aditivo on(db_gestao_contrato.aditivo.N_contrato = db_gestao_contrato.contrato.Numero)
+              ) join db_compras_vendas.cliente on(db_compras_vendas.saida.Id_cliente = db_compras_vendas.cliente.Cod_cliente)
+            ) join db_compras_vendas.setorvendas on(db_compras_vendas.saida.Requisitante = db_compras_vendas.setorvendas.IdSetor)
+          ) join db_logistica_entrega.movimentacao on(db_logistica_entrega.movimentacao.Num_Saida = db_compras_vendas.saida.NumSaida)
+        ) join db_logistica_entrega.veiculo on(db_logistica_entrega.veiculo.Placa = db_logistica_entrega.movimentacao.IdPlaca)
+      ) join db_logistica_entrega.abastecimento on(db_logistica_entrega.abastecimento.Placa_Co = db_logistica_entrega.veiculo.Placa)
+    ) join db_logistica_entrega.motorista on(db_logistica_entrega.abastecimento.Id_Motorista = db_logistica_entrega.motorista.IdMotorista)
+  )join db_compras_vendas.entrada on(db_compras_vendas.entrada.CodigoEntrada = db_compras_vendas.estoque.CodigoEstoque)
+)join db_compras_vendas.fornecedor on(db_compras_vendas.entrada.Num_fornec = db_compras_vendas.fornecedor.CodFornecedor);
 --  Populate DM_Compras
-use DM_compras;
+use DM_compras
 
 INSERT dim_compras_compras (Num_entrada, Fornecedor, GrupoVendas, NotaFiscal)
 SELECT Num_entrada, IdFornecedor, entrada_grupo, NotaFiscal
@@ -130,7 +132,7 @@ UPDATE fato_compras SET
 
 
 --  Populate DM_logistica
-use DM_logistica;
+use DM_logistica
 
 INSERT dim_logistica_produto (Produto, Grupo, Unidade, ClasseABC)
 SELECT Descricao, Grupo, Unidade, Abc
@@ -191,7 +193,7 @@ UPDATE fato_logistica SET
 
 
 --  Populate DM_financas
-use DM_financas;
+use DM_financas
 
 INSERT dim_financas_estoque (Grupo, Quant_minima, Ressuprimento)
 SELECT Grupo, Q_minima, Ressuprimento
@@ -257,7 +259,7 @@ UPDATE fato_Financas SET
 
 --  Populating Dw_comercial
 
-use dw_comercial;
+use dw_comercial
 
 INSERT dim_dw_vendas (Num_Saida, Cliente, GrupoVendas, NotaFiscal, SetorVendas, EnderecoVenda, CidadeVenda, BairroVenda, EstadoVenda)
 SELECT Num_Saida, Nome, saida_grupo, NotaFiscalVenda, nomesetor, Endereco, Cidade, Regiao, Pais

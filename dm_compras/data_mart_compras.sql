@@ -1,6 +1,6 @@
 drop database if exists DM_compras;
 create database DM_compras;
-use DM_compras;
+use DM_compras
 
 --
 -- Estrutura da tabela `dim_compras_compras`

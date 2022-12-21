@@ -1,6 +1,6 @@
 create database db_gestao_contrato;
 
-use db_gestao_contrato;
+use db_gestao_contrato
 --
 -- Estrutura da tabela `supervisor`
 --
