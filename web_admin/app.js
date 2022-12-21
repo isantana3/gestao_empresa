@@ -45,7 +45,7 @@ app.get('/contratos/', async function (req, res) {
 app.get('/transporte/', async function (req, res) {
     let colecao = new Array();
     colecao = await controle.transporteData();
-    res.render('tansporte.ejs', { dados: colecao }); 
+    res.render('transporte.ejs', { dados: colecao }); 
 });
 
 // GET GERAL
